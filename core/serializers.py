@@ -13,8 +13,8 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 class QuestionSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
-    answers = AnswerSerializer(many=True, read_only=True)
+    answers_list = AnswerSerializer(many=True, read_only=True, source='answers')
     class Meta:
         model = Question
-        fields = '__all__'
+        fields = ['id', 'user', 'title', 'body', 'created_at', 'answers_list']
 
