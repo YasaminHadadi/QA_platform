@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from .models import Question, Answer
-from .serializers import QuestionSerializer, AnswerSerializer
+from .serializers import QuestionSerializer, AnswerSerializer, UserRegisterSerializer
 from .permissions import IsOwnerOrReadOnly
 
 #Question View
@@ -33,3 +33,7 @@ class AnswerDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+class UserRegisterView(generics.CreateAPIView):
+    serializer_class = UserRegisterSerializer
+    permission_classes = [permissions.AllowAny, ]
